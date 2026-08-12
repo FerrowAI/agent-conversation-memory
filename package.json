@@ -1,0 +1,29 @@
+{
+  "name": "agent-conversation-memory",
+  "version": "1.0.0",
+  "description": "Bounded conversation memory for LLM agents — token-budget rolling window, pinned messages, eviction callback for summarize-and-reinsert, keyword recall over evicted history, JSON export/import. Zero runtime dependencies.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "demo": "npm run build && node examples/demo.js"
+  },
+  "keywords": [
+    "llm",
+    "ai-agents",
+    "conversation-memory",
+    "context-window",
+    "agents",
+    "memory",
+    "chat",
+    "rag"
+  ],
+  "author": "Ruzylo-cloud",
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ruzylo-cloud/agent-conversation-memory.git"
+  }
+}

@@ -1,0 +1,38 @@
+# agent-conversation-memory
+
+> Bounded conversation memory for LLM agents — token-budget rolling window, pinned messages, evicted-history recall.
+
+agent-conversation-memory keeps an agent's conversation within a token
+budget without dropping the system prompt or losing evicted facts
+silently. Messages are added via `addMessage`; the active window evicts
+the oldest **non-pinned** messages (in insertion order) whenever total
+estimated tokens exceed `tokenBudget` — pinned messages (e.g. the system
+prompt) are never evicted. An `onEvict` callback fires for each evicted
+message, enabling the summarize-and-reinsert pattern: you supply your own
+summarizer function and call `addMessage` again with the summary — this
+library makes no LLM calls itself. Evicted messages stay searchable via a
+keyword inverted index (`recall(keyword)`), and the full state
+round-trips through `exportJSON`/`importJSON`. Token estimation defaults
+to a built-in chars/4 heuristic but accepts any custom estimator. Zero
+runtime dependencies, strict TypeScript.
+
+## API
+
+- `class ConversationMemory(options: ConversationMemoryOptions)`
+  - `addMessage(input: AddMessageInput): Message`
+  - `getMessages(): Message[]` — current active window
+  - `getEvicted(): Message[]` — all evicted messages, in eviction order
+  - `recall(keyword: string): RecallResult[]` — keyword search over evicted history
+  - `activeTokens(): number`
+  - `exportJSON(): string`
+  - `importJSON(json: string): void`
+- `defaultEstimateTokens(text: string): number` — the built-in chars/4 estimator
+- Types: `Message { id, role, content, pinned?, timestamp? }`, `AddMessageInput`, `TokenEstimator`, `EvictionCallback`, `ConversationMemoryOptions { tokenBudget, estimateTokens?, onEvict? }`, `RecallResult { message, matchedKeywords }`
+
+## Install
+
+```
+npm install agent-conversation-memory
+```
+
+Part of the Ferrow open-source toolkit: https://github.com/Ruzylo-cloud/ferrow-toolkit — sponsored by https://ferrow.ai
