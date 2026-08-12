@@ -1,4 +1,8 @@
 # agent-conversation-memory
+
+```sh
+npm install @ferrow/agent-conversation-memory
+```
 ![CI](https://github.com/FerrowAI/agent-conversation-memory/actions/workflows/ci.yml/badge.svg)
 
 Bounded conversation memory for LLM agents — token-budget rolling window

@@ -32,7 +32,7 @@ runtime dependencies, strict TypeScript.
 ## Install
 
 ```
-npm install agent-conversation-memory
+npm install @ferrow/agent-conversation-memory
 ```
 
 Part of the Ferrow open-source toolkit: https://github.com/FerrowAI/ferrow-toolkit — sponsored by https://ferrow.ai
